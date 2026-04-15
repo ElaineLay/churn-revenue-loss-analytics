@@ -198,9 +198,9 @@ CREATE TABLE fact_subscription_usage (
     avg_resolution_hours              DECIMAL(8, 2)   NULL, 		-- support_tickets	→ avg(closed_at - submitted_at) 
     avg_satisfaction_score            DECIMAL(4, 2)   NULL, 		-- customer satisfaction score 	→ avg satisfaction score for month
     
-    is_churned						  TINYINT(1)      NOT NULL DEFAULT 0,	 				 -- subscriptions.churn_flag → mirrored from fact_subscriptions for standalone sub usage analysis 
+    is_churned						  TINYINT(1)      NOT NULL DEFAULT 0,	 				  -- subscriptions.churn_flag → mirrored from fact_subscriptions for standalone sub usage analysis 
 	
-    CONSTRAINT pk_fact_sub_usage	  PRIMARY KEY (date_key, account_key, subscription_key), -- grain: one subscription per month
+    CONSTRAINT pk_fact_sub_usage	  PRIMARY KEY (date_key, account_key, subscription_key),  -- grain: one subscription per month
     
 	CONSTRAINT fk_usage_date
 		FOREIGN KEY (date_key)		  REFERENCES dim_date(date_key),
