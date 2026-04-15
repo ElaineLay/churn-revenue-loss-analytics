@@ -57,9 +57,9 @@ FROM (
         LOWER(TRIM(is_reactivation))          = 'true'                          AS is_reactivation,
         NULLIF(TRIM(feedback_text), '')                                         AS feedback_text,
         
-        ROW_NUMBER() OVER (															-- DEDUPE: defence against duplicate churn_event_ids in source data 												   
+        ROW_NUMBER() OVER (															-- dedupe: defence against duplicate churn_event_ids in source data 												   
             PARTITION BY churn_event_id										        -- which would inflate refund_amount_usd
-            ORDER BY STR_TO_DATE(NULLIF(TRIM(churn_date), ''), '%d/%m/%Y') DESC		-- RESOLUTION: retain record with most recent churn_date per churn_event_id
+            ORDER BY STR_TO_DATE(NULLIF(TRIM(churn_date), ''), '%d/%m/%Y') DESC		-- resolution: retain record with most recent churn_date per churn_event_id
         ) AS row_num
 
     FROM churn_raw.churn_events

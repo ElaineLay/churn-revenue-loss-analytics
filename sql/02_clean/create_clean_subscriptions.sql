@@ -66,4 +66,3 @@ SELECT
     LOWER(TRIM(billing_frequency))                                      AS billing_frequency,
     LOWER(TRIM(auto_renew_flag)) = 'true'                               AS auto_renew_flag
 FROM churn_raw.subscriptions;
-

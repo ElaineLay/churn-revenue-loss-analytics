@@ -53,8 +53,8 @@ FROM (
         CAST(COALESCE(NULLIF(TRIM(error_count),         ''), 0) AS UNSIGNED) AS error_count,
         LOWER(TRIM(is_beta_feature)) = 'true'                                AS is_beta_feature,
         
-		ROW_NUMBER() OVER (					-- DEDUPE: raw data contains duplicate usage_ids (source data quality issue)
-            PARTITION BY usage_id			-- RESOLUTION: retain record with the most recent usage_date per usage_id on assumption
+		ROW_NUMBER() OVER (					-- dedupe: raw data contains duplicate usage_ids (source data quality issue)
+            PARTITION BY usage_id			-- resolution: retain record with the most recent usage_date per usage_id on assumption
             ORDER BY usage_date DESC		-- that later records represent corrections to earlier erroneous entries
         ) AS row_num
         
