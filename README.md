@@ -106,7 +106,7 @@ This dataset was used to simulate a real-world churn analytics workflow, includi
 
 **dim_date**
 
-Purpose: creates a monthly calendar reference for time-based analysis
+Purpose: creates a monthly calendar reference for time-based analysis  
 Source:  generated month spine 
 
 | Column            | Type     | Description                                                     |
@@ -122,7 +122,7 @@ Source:  generated month spine
 
 **dim_account**
 
-Purpose: stores customer attributes used to segment churn-based revenue loss
+Purpose: stores customer attributes used to segment churn-based revenue loss  
 Source:  churn_clean.accounts 
 
 | Column             | Type    | Description                                      |
@@ -137,7 +137,7 @@ Source:  churn_clean.accounts
 
 **dim_subscription**
 
-Purpose: stores descriptive attributes of subscriptions for revenue loss analysis 
+Purpose: stores descriptive attributes of subscriptions for revenue loss analysis  
 Source:  churn_clean.subscriptions
 
 | Column             | Type    | Description                                         |
@@ -152,7 +152,7 @@ Source:  churn_clean.subscriptions
 
 **dim_churn_reason**
 
-Purpose: standardises reasons for churn for consistent reporting 
+Purpose: standardises reasons for churn for consistent reporting  
 Source:  churn_clean.churn_events
 
 | Column             | Type    | Description                                                        |
@@ -165,7 +165,7 @@ Source:  churn_clean.churn_events
 
 **fact_subscriptions**
 
-Purpose: records subscription-level revenue and subscription lifecycle status
+Purpose: records subscription-level revenue and subscription lifecycle status  
 Source:  churn_clean.subscriptions 
 
 | Column                | Type    | Description                                                   |
@@ -183,7 +183,7 @@ Source:  churn_clean.subscriptions
 
 **fact_churn_events**
 
-Purpose: records details of each churn event and its direct financial impact 
+Purpose: records details of each churn event and its direct financial impact   
 Source:  churn_clean.churn_events
 
 | Column                     | Type    | Description                                                   |
@@ -201,7 +201,7 @@ Source:  churn_clean.churn_events
 
 **fact_subscription_usage**
 
-Purpose: tracks product usage and engagement at subscription-month level
+Purpose: tracks product usage and engagement at subscription-month level  
 Source:  churn_clean.feature_usage + churn_clean.support_tickets 
 
 | Column                              | Type     | Description                                              |
