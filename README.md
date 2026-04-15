@@ -1,6 +1,5 @@
 # Churn Revenue Loss Analytics
 
-
 An end-to-end SQL analytics project quantifying the revenue impact of customer churn across industry, geography, and subscription tier. 
 This project was built to answer one executive question: **where is churn driving the greatest revenue loss, and which segments should be prioritised for retention?**
 
@@ -89,7 +88,7 @@ Built in Tableau Public to explore churn impact across segments.
 
 ## Data Source & Attribution
 
-Data: RavenStack (synthetic SaaS multi-table dataset)
+Data: RavenStack (synthetic SaaS multi-table dataset)  
 Source Credit: River at Rivalytics (Kaggle; MIT-like license)
 
 This dataset was used to simulate a real-world churn analytics workflow, including subscription lifecycle tracking, churn events, and customer usage behaviour. 
