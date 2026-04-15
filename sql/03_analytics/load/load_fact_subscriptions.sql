@@ -22,7 +22,7 @@ USE churn_analytics;
 -- ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 INSERT INTO churn_analytics.fact_subscriptions (
 	subscription_key,										-- subscription_key is PK and serves as FK to dim_subscription → rationale: valid because grain is 
-    account_key,											-- one row per subscription; revisit if grain expands or SCD Type 2 introduced
+    account_key,											-- one row per subscription; revisit if grain expands 
     start_date_key,
     end_date_key,
 	mrr,
@@ -52,4 +52,3 @@ FROM churn_clean.subscriptions	AS s
     
     INNER JOIN churn_analytics.dim_subscription AS ds		-- SK lookup: subscriptions joined to dim_subscription on subscription_id → Inner Join used to silently exclude 
     ON s.subscription_id = ds.subscription_id;				-- subs with no matching rows in ds, instead of inserting row with Null FK
-

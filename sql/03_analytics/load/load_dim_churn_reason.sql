@@ -13,7 +13,7 @@ USE churn_analytics;
 --   5. fact_subscriptions			→ depends on dim_subscription, dim_account, dim_date
 -- 	 6. fact_churn_events			→ depends on dim_account, dim_date, dim_churn_reason
 -- 	 7. fact_subscription_usage		→ depends on dim_subscription, dim_account, dim_date
--- 		  note: load after fact_subscriptions → is_churned sourced from subscriptions.churn_flag; no FK constraint, but logical dependency exists at ETL time
+-- 		  note: load after fact_subscriptions → is_churned sourced from subscriptions.churn_flag; no FK constraint, but logical dependency exists at ETL time 
 
 
 -- ================================================================================================================================================================

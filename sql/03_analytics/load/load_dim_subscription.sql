@@ -23,7 +23,7 @@ USE churn_analytics;
 -- ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 INSERT INTO churn_analytics.dim_subscription (
     subscription_id,						-- subscription_key omitted → AUTO_INCREMENT surrogate assigned by database on insert
-											-- account_id omitted → account-subscription relationship resolved through fact tables, not the dimension
+											-- account_id omitted → account-subscription relationship resolved through fact tables, not the dimension 
     plan_tier,
 	seats,
 	is_trial,

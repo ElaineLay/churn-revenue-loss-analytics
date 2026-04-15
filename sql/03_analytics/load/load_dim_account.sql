@@ -34,5 +34,5 @@ SELECT
     a.industry,
     a.country,
     a.plan_tier						-- snapshot: subscription plan at account entry, not at time of billing
-									-- 			 descriptive attribute only; does not track changes
+									-- 			 descriptive attribute only (does not track changes)
 FROM churn_clean.accounts AS a;

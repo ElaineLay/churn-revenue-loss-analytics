@@ -13,7 +13,7 @@ USE churn_analytics;
 --   5. fact_subscriptions			→ depends on dim_subscription, dim_account, dim_date
 -- 	 6. fact_churn_events			→ depends on dim_account, dim_date, dim_churn_reason
 -- 	 7. fact_subscription_usage		→ depends on dim_subscription, dim_account, dim_date
--- 		  note: load after fact_subscriptions → is_churned sourced from subscriptions.churn_flag; no FK constraint, but logical dependency exists at ETL time
+-- 		  note: load after fact_subscriptions → is_churned sourced from subscriptions.churn_flag; no FK constraint, but logical dependency exists at ETL time 
 
 
 -- ================================================================================================================================================================
@@ -59,7 +59,7 @@ SELECT
     CASE
 		WHEN YEAR(month_start) * 100 + MONTH(month_start) =											 -- fictitious data set	→ in query time, is_current_month should flag the latest month
 	         YEAR(MAX(month_start) OVER()) * 100 + MONTH(MAX(month_start) OVER())					 -- in the data; MAX window function takes the maximum month_start across entire result set;			
-		THEN 1 ELSE 0																				 -- flags if row is from the latest month available in the data
+		THEN 1 ELSE 0																				 -- flags if row is from the latest month available in the data 
 	END																			  AS is_current_month
     
 FROM 	 month_spine

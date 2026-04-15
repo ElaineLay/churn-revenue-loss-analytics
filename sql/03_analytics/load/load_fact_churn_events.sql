@@ -21,7 +21,7 @@ USE churn_analytics;
 -- 							→ Grain:  one row per churn event
 -- ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 INSERT INTO churn_analytics.fact_churn_events (
-	churn_event_id,											  -- churn_event_key omitted → AUTO_INCREMENT surrogate assigned by database on insert	
+	churn_event_id,											  -- churn_event_key omitted → AUTO_INCREMENT surrogate assigned by database on INSERT
 	account_key,
 	churn_date_key,
     churn_reason_key,

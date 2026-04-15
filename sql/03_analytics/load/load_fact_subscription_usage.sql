@@ -41,7 +41,7 @@ INSERT INTO churn_analytics.fact_subscription_usage (
     is_churned
 )
 
-WITH monthly_feature AS (
+WITH monthly_feature AS (										-- CTE one
     SELECT
         fu.subscription_id,
         YEAR(fu.usage_date) * 100 + MONTH(fu.usage_date)        AS date_key,
@@ -59,7 +59,7 @@ WITH monthly_feature AS (
         fu.subscription_id,
         YEAR(fu.usage_date) * 100 + MONTH(fu.usage_date)
 ),
-ticket_monthly AS (
+ticket_monthly AS (											   -- CTE two
     SELECT
         st.account_id,
         YEAR(st.submitted_at) * 100 + MONTH(st.submitted_at)   AS date_key,
@@ -81,7 +81,7 @@ ticket_monthly AS (
         st.account_id,
         YEAR(st.submitted_at) * 100 + MONTH(st.submitted_at)
 ),
-combined AS (
+combined AS (												   -- CTE three
     SELECT
         fm.date_key,
         da.account_key,
@@ -115,6 +115,7 @@ combined AS (
             ON s.account_id = tm.account_id
             AND fm.date_key = tm.date_key
 )
+
 SELECT
     date_key,
     account_key,
