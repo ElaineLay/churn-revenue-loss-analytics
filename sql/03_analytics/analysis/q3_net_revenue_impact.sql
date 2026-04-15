@@ -21,7 +21,7 @@ USE churn_analytics;
 -- 												offset by refund activity 
 -- ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-WITH churned_mrr AS (		-- CTE 1 → aggregate churned MRR at account level														 
+WITH churned_mrr AS (		-- CTE one → aggregate churned MRR at account level														 
 	SELECT			
 		fs.account_key,
 		SUM(fs.mrr) AS churned_mrr_amount
@@ -29,7 +29,7 @@ WITH churned_mrr AS (		-- CTE 1 → aggregate churned MRR at account level
 	WHERE fs.is_churned = 1						 		
 	GROUP BY fs.account_key
 ),
-refunds AS (			    -- CTE 2 → aggregate refunds at account level								
+refunds AS (			    -- CTE two → aggregate refunds at account level								
 	SELECT
 		ce.account_key,
 		SUM(ce.refund_amount_usd) AS total_refunds
@@ -51,19 +51,19 @@ SELECT
 
 FROM churned_mrr AS cm
 	LEFT JOIN refunds AS r								-- Left Join: retain all churned accounts (all cm records) even if no matching churn event exists
-    ON cm.account_key = r.account_key				
+    ON cm.account_key = r.account_key			
+	
     INNER JOIN churn_analytics.dim_account AS da		-- Inner Join: retain all matching records
     ON cm.account_key = da.account_key 				
     
 GROUP BY da.industry, da.country
-
 ORDER BY net_revenue_impact DESC;
 
 
 -- ================================================================================================================================================================
 -- Q3.1: Total Churned MRR by Industry		→ Which industry has the highest total churned MRR across all markets? (findings in Observations)
 -- ----------------------------------------------------------------------------------------------------------------------------------------------------------------
-WITH churned_mrr AS (		-- CTE 1 → aggregate churned MRR at account level														 
+WITH churned_mrr AS (		                -- CTE one → aggregate churned MRR at account level														 
 	SELECT			
 		fs.account_key,
 		SUM(fs.mrr) AS churned_mrr_amount
@@ -75,7 +75,7 @@ SELECT
 	da.industry,
     SUM(cm.churned_mrr_amount)			    AS churned_mrr
 FROM churned_mrr AS cm
-	INNER JOIN churn_analytics.dim_account  AS da		-- Inner Join: retain all matching records
+	INNER JOIN churn_analytics.dim_account  AS da	-- Inner Join: retain all matching records
     ON cm.account_key = da.account_key 	
 GROUP BY da.industry
 ORDER BY churned_mrr DESC; 

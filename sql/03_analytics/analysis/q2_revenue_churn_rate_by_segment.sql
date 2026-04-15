@@ -41,5 +41,4 @@ GROUP BY
 	da.industry,
     da.country,
     ds.plan_tier
-    
 ORDER BY churn_rate_rank;

@@ -30,10 +30,8 @@ FROM churn_analytics.fact_subscriptions   		AS fs
     ON fs.subscription_key = ds.subscription_key
 
 WHERE is_churned = 1
-
 GROUP BY
 	da.industry,
     da.country,
     ds.plan_tier
-    
 ORDER BY churned_mrr DESC;

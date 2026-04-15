@@ -18,8 +18,7 @@ USE churn_analytics;
 -- 														EdTech/Enterprise has highest churned MRR in top cohort ($89k) despite ranking third by rate - raises a 
 -- 														dual priority by volume and proportional risk;
 -- 														seven of fifteen high value segments churn above overall rate of 11.43% - all Enterprise or Pro initial 
--- 														plan tier - high value accounts with Basic initial tier are consistently below overall rate and appear stable
--- 													
+-- 														plan tier - high value accounts with Basic initial tier are consistently below overall rate and appear stable											
 -- ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 WITH account_value AS (
 	SELECT
@@ -57,9 +56,7 @@ FROM account_cohort AS cohort
     ON cohort.account_key = da.account_key
 
 WHERE cohort.account_quartile = 1	      											   -- filter by top quartile 
-
 GROUP BY 
 	da.industry,
     da.initial_plan_tier
-
 ORDER BY segment_churn_rate DESC;

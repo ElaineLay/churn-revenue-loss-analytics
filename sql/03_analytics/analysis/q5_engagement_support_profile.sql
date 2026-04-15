@@ -27,8 +27,8 @@ SELECT
     ds.plan_tier,
     
     ROUND(AVG(CASE WHEN fsu.is_churned = 1 THEN fsu.active_days END), 2)		     AS avg_active_days_churned,		-- comparison profile: calculate churned and retained
-    ROUND(AVG(CASE WHEN fsu.is_churned = 0 THEN fsu.active_days END), 2)		     AS avg_active_days_retained,		-- subscriptions from same population, then compute
-	ROUND(AVG(CASE WHEN fsu.is_churned = 1 THEN fsu.active_days END) -													-- divergence 
+    ROUND(AVG(CASE WHEN fsu.is_churned = 0 THEN fsu.active_days END), 2)		     AS avg_active_days_retained,		-- subscriptions from same population, then compute divergence
+	ROUND(AVG(CASE WHEN fsu.is_churned = 1 THEN fsu.active_days END) -													
 		  AVG(CASE WHEN fsu.is_churned = 0 THEN fsu.active_days END), 2)		     AS active_days_delta,
          
     ROUND(AVG(CASE WHEN fsu.is_churned = 1 THEN fsu.feature_adoption_count END), 2)  AS avg_feature_count_churned,
@@ -61,5 +61,4 @@ FROM churn_analytics.fact_subscription_usage AS fsu
 GROUP BY 
 	da.industry,
     ds.plan_tier
-
 ORDER BY active_days_delta ASC; 	-- display so most negative deltas (where churned accounts least engaged relative to retained appear first)
