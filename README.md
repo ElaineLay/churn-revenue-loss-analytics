@@ -1,23 +1,19 @@
 # Churn Revenue Loss Analytics
 
-An end-to-end SQL analytics project quantifying the revenue impact of customer churn across industry, geography, and subscription tier. 
-This project was built to answer one executive question: **where is churn driving the greatest revenue loss, and which segments should be prioritised for retention?**
-
+An end-to-end SQL analytics project quantifying the revenue impact of customer churn across industry, geography, and subscription tier. This project was built to answer one executive question: **where is churn driving the greatest revenue loss, and which segments should be prioritised for retention?**
 
 ## Context
 
-Customer churn is the rate at which subscribers cancel or move to a lower tier and is a significant driver of revenue loss in subscription-based software businesses. This project quantifies the financial impact of churn and examines which customer segments across industry, geography, and subscription tier pose the greatest churn risk. The aim is to determine where retention efforts should be focused to minimise loss.
+Customer churn is the rate at which subscribers cancel or move to a lower tier, and is one of the most consequential metrics in subscription-based software businesses. Unlike a one-off lost sale, churn permanently erases future recurring revenue. For SaaS businesses where customer acquisition costs can be high and payback periods are long, retention failures compound quickly: the revenue that should be funding growth is instead spent re-acquiring customer accounts who should never have left. This project quantifies where that financial damage is concentrated and which segments should be prioritised for retention.
 
 ## Tools
 
-- SQL (MySQL)
-- Tableau Public 
-
+- SQL (MySQL)  
+- Tableau Public
 
 ## Data
 
-The executive question steered a targeted analysis of a multi-table synthetic relational dataset reflecting the subscription, usage support, and churn activity of a real-world SaaS business. This fictional platform simulates a B2B SaaS venture that captured customer data across a twenty-four month window, enabling a consistent analysis of churn trends over time. To uncover insights on the financial impact of churn and which segments are most at risk, this project simulates an analytics pipeline using SQL and BI tools.
-
+A multi-table synthetic relational dataset reflecting the subscription, usage, support, and churn activity of a real-world SaaS business. This fictional platform simulates a B2B SaaS venture that captured customer data across a twenty-four month window, enabling consistent analysis of churn trends over time.
 
 ## Architecture
 
@@ -27,14 +23,13 @@ A separate clean layer cast types correctly, standardised categories, enforced r
 
 The analytics tier implemented dimensional modelling to optimise reporting. Each fact and dimension had a defined grain that was derived from the clean schema to ensure consistency in downstream analysis. The modelling decisions below reflect key design choices made during this process.
 
-
 ## Modelling
 
 The analytics tier implemented a star schema designed to calculate metrics and perform cohort analysis at query time. It was assumed during preliminary analysis that each customer account held at most one active subscription at any point in time. This was embedded in the first version of table definitions. Exploration of the source data invalidated this assumption and revealed that each account could hold multiple concurrent subscriptions across different plan tiers and billing frequencies. 
 
 The first design iteration of the schema attempted to join source tables: churn_events to subscriptions through a composite account-month key, which caused fan-out where an account had more than one active subscription in a given month. For instance, a single churn event for an account would join to every active subscription in that same month, returning more than one row and inflating churn metrics. 
 
-The second version of table definitions corrects this by decomposing the original fact table fact_subscription_revenue into two separate facts modelled at their natural grains.  These facts are joined at query time through dim_account, rather than in the model, to preserve grain integrity while still enabling cross-fact analysis:
+The second version of table definitions corrects this by decomposing the original fact table fact_subscription_revenue into two separate facts modelled at their natural grains.  These facts are joined at query time through dim_account, rather than in the model, to preserve grain integrity while still enabling cross-fact analysis:  
 - fact_subscriptions: one row per subscription; and
 - fact_churn_events: one row per churn event (account-level)
 
@@ -42,12 +37,11 @@ The source churn_events table records a reason_code column containing values for
 
 This dimension was manually enriched to define two categories that reflect executive-level ownership: Commercial (pricing, budget, competitor codes) owned by Sales and Revenue teams; and Product & Experience (support, features) owned by Product teams. This design choice enables churn reason analysis to be surfaced at the category-level in dashboards without requiring string manipulation at query time. Having a normalised lookup also provides a controlled extension avenue if new reason codes were introduced in the future.
 
-
 ## Insights
 
-**1. Enterprise accounts drive the majority of churn-based revenue loss**  
+**1. Enterprise accounts drive the majority of churn-driven revenue loss**  
 
-The Enterprise subscription tier dominates churn driven revenue loss across all segments; HealthTech and FinTech industries in the US have the greatest absolute revenue loss, with the HealthTech/US/Enterprise cohort alone accounting for $136k in churned MRR.
+The Enterprise subscription tier dominates churn-driven revenue loss across all segments; HealthTech and FinTech industries in the US have the greatest absolute revenue loss, with the HealthTech/US/Enterprise cohort alone accounting for $136k in churned MRR.
 
 **2. Small segments can pose a disproportionate risk**  
 
@@ -55,18 +49,17 @@ The proportional percentage of revenue that churned out of the total MRR for eac
 
 **3. Refunds do not materially offset churn losses**  
 
-Refunds offset less than 1% of churned MRR in every segment, indicating the net financial damage mirrors gross churn-based revenue loss with no meaningful cash recovery.
+Refunds offset less than 1% of churned MRR in every segment, indicating the net financial damage mirrors gross churn-driven revenue loss with no meaningful cash recovery.
 
 **4. High-value churn is concentrated in premium tiers**  
 
-Seven of fifteen high-value segments (Pro and Enterprise tier) churn above the overall benchmark churn rate of 11.43%. Basic tier high-value accounts all churn below this benchmark representing a retention success pattern worth understanding. 
+Seven of fifteen high-value segments (Pro and Enterprise tier) churn above the overall benchmark churn rate of 11.43%. Basic tier high-value accounts all churn below this benchmark, representing a retention success pattern worth understanding. 
 
-**5. No clear behavioural indicators warning churn risk**  
+**5. No clear behavioural indicators signalling churn risk**  
 
 Behavioural data does not differentiate churned from retained subscriptions in this dataset; support and engagement profiles appear nearly identical up to point of churn. This suggests churn drivers are predominantly commercial rather than product-based, and that feature usage metrics alone may be insufficient as early warning signals. Note that the absence of behavioural divergence may reflect the synthetic nature of the source data rather than a genuine real-world pattern. 
 
-
-## Recommendations
+## Recommendations  
 
 **1. Prioritise retention investment in HealthTech and FinTech Enterprise accounts in the US**  
 These segments represent the greatest absolute loss and net revenue risk.
@@ -77,7 +70,6 @@ A 52% churn rate within a single cohort indicates a localised issue that warrant
 **3. Reframe retention strategy around commercial signals**  
 Behavioural data shows no meaningful divergence between churned and retained accounts. This suggests that pricing, budget, and competitive pressures are primary churn drivers and that product engagement metrics alone may be insufficient as an effective early warning system. 
 
-
 ## Dashboard
 
 Interactive visualisation: **Churn Revenue Loss Analytics**  
@@ -85,14 +77,12 @@ Built in Tableau Public to explore churn impact across segments.
 
 [View Dashboard](https://public.tableau.com/app/profile/elaine.lay/viz/ChurnAnalyticsRevenueLoss/ChurnAnalyticsDashboard)
 
-
 ## Data Source & Attribution
 
-Data: RavenStack (synthetic SaaS multi-table dataset)  
+Data: RavenStack (synthetic SaaS multi-table dataset)   
 Source Credit: River at Rivalytics (Kaggle; MIT-like license)
 
 This dataset was used to simulate a real-world churn analytics workflow, including subscription lifecycle tracking, churn events, and customer usage behaviour. 
-
 
 ## Appendix: Data Dictionary 
 
@@ -101,7 +91,6 @@ This dataset was used to simulate a real-world churn analytics workflow, includi
 
 
 ### Data Dictionary
-
 
 **dim_date**
 
@@ -121,7 +110,7 @@ Source:  generated month spine
 
 **dim_account**
 
-Purpose: stores customer attributes used to segment churn-based revenue loss  
+Purpose: stores customer attributes used to segment churn-driven revenue loss  
 Source:  churn_clean.accounts 
 
 | Column             | Type    | Description                                      |
@@ -234,6 +223,31 @@ Source:  churn_clean.feature_usage + churn_clean.support_tickets
 | Net Revenue Impact       | 3         | Churned MRR - refunds issued                    | True financial damage after cash outflows   |
 | High Value Churn Rate    | 4         | Churn rate within top MRR quartile              | Retention prioritisation                    |
 | Behavioural Divergence   | 5         | Avg metric delta: churned vs retained           | Leading indicators of churn risk            |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
