@@ -69,12 +69,15 @@ Behavioural data does not differentiate churned from retained subscriptions in t
 ## Recommendations
 
 **1. Prioritise retention investment in HealthTech and FinTech Enterprise accounts in the US**  
+
 These segments represent the greatest absolute loss and net revenue risk.
 
 **2. Investigate EdTech/DE/Enterprise immediately**  
+
 A 52% churn rate within a single cohort indicates a localised issue that warrants review.
 
 **3. Reframe retention strategy around commercial signals**  
+
 Behavioural data shows no meaningful divergence between churned and retained accounts. This suggests that pricing, budget, and competitive pressures are primary churn drivers and that product engagement metrics alone may be insufficient as an effective early warning system. 
 
 
