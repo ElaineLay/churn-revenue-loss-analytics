@@ -73,8 +73,8 @@ Behavioural data shows no meaningful divergence between churned and retained acc
 ## Dashboard
 
 Interactive visualisation: **Churn Revenue Loss Analytics**  
-Built in Tableau Public to explore churn impact across segments.
-
+Built in Tableau Public to explore churn impact across segments  
+[View Dashboard] (https://public.tableau.com/app/profile/elaine.lay/vizzes)
 
 
 ## Data Source & Attribution
