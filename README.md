@@ -75,7 +75,7 @@ Behavioural data shows no meaningful divergence between churned and retained acc
 Interactive visualisation: **Churn Revenue Loss Analytics**  
 Built in Tableau Public to enable segment-level exploration of churned MRR, revenue churn rate, and net revenue impact. Supports filtering by industry, geography, and subscription tier to surface concentration and proportional risk across cohorts. 
 
-[View Dashboard](https://public.tableau.com/app/profile/elaine.lay/viz/ChurnAnalyticsRevenueLoss/ChurnAnalyticsDashboard)
+[View Dashboard](https://public.tableau.com/app/profile/elaine.lay/vizzes)
 
 ## Data Source & Attribution
 
