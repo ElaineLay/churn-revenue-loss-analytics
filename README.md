@@ -4,7 +4,7 @@ An end-to-end SQL analytics project quantifying the revenue impact of customer c
 
 ## Context
 
-Customer churn is the rate at which subscribers cancel or move to a lower tier, and is one of the most consequential metrics in subscription-based software businesses. Unlike a one-off lost sale, churn permanently erases future recurring revenue. For SaaS businesses where customer acquisition costs can be high and payback periods are long, retention failures compound quickly: the revenue that should be funding growth is instead spent re-acquiring customer accounts who should never have left. This project quantifies where that financial damage is concentrated and which segments should be prioritised for retention.
+Customer churn is the rate at which subscribers cancel or move to a lower tier, and is one of the most consequential metrics in subscription-based software businesses. Unlike a one-off lost sale, churn permanently erases future recurring revenue. This project quantifies where that financial damage is concentrated and which segments should be prioritised for retention.
 
 ## Tools
 
@@ -29,7 +29,7 @@ The analytics tier implemented a star schema designed to calculate metrics and p
 
 The first design iteration of the schema attempted to join source tables: churn_events to subscriptions through a composite account-month key, which caused fan-out where an account had more than one active subscription in a given month. For instance, a single churn event for an account would join to every active subscription in that same month, returning more than one row and inflating churn metrics. 
 
-The second version of table definitions corrects this by decomposing the original fact table fact_subscription_revenue into two separate facts modelled at their natural grains.  These facts are joined at query time through dim_account, rather than in the model, to preserve grain integrity while still enabling cross-fact analysis:  
+The second version of table definitions corrected this by decomposing the original fact table fact_subscription_revenue into two separate facts modelled at their natural grains.  These facts are joined at query time through dim_account, rather than in the model, to preserve grain integrity while still enabling cross-fact analysis:  
 - fact_subscriptions: one row per subscription; and
 - fact_churn_events: one row per churn event (account-level)
 
@@ -73,9 +73,9 @@ Behavioural data shows no meaningful divergence between churned and retained acc
 ## Dashboard
 
 Interactive visualisation: **Churn Revenue Loss Analytics**  
-Built in Tableau Public to explore churn impact across segments.  
-[View Dashboard](https://public.tableau.com/app/profile/elaine.lay/vizzes)
+Built in Tableau Public to enable segment-level exploration of churned MRR, revenue churn rate, and net revenue impact. Supports filtering by industry, geography, and subscription tier to surface concentration and proportional risk across cohorts. 
 
+[View Dashboard](https://public.tableau.com/app/profile/elaine.lay/viz/ChurnAnalyticsRevenueLoss/ChurnAnalyticsDashboard)
 
 ## Data Source & Attribution
 
